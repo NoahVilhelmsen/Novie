@@ -43,7 +43,7 @@ export function Hero() {
         muted={isMuted}
         playsInline
       >
-        <source src="/hero-video.mov" type="video/quicktime" />
+        <source src="https://res.cloudinary.com/dom8piybw/video/upload/v1774045621/Timeline_4_as2mwb.mp4" type="video/mp4" />
       </video>
 
       {/* Dark Overlay */}
