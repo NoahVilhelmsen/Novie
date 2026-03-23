@@ -9,8 +9,8 @@ const landscapeProjects = [
   {
     id: 1,
     title: "Final med SFX og musikk",
-    video: "/Final med SFX og musikk.mov",
-    poster: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&h=450&fit=crop",
+    video: "https://player.vimeo.com/video/1176194270",
+    poster: "https://vumbnail.com/1176194270.jpg",
   },
   {
     id: 2,
