@@ -8,19 +8,19 @@ import { Play, Pause } from "lucide-react"
 const landscapeProjects = [
   {
     id: 1,
-    title: "Final med SFX og musikk",
+    title: "Davinci Resolve - Behind The Creator",
     video: "https://player.vimeo.com/video/1176194270",
     poster: "https://vumbnail.com/1176194270.jpg",
   },
   {
     id: 2,
-    title: "Dag 4 Stagedive film",
+    title: "Stagedive 2025",
     video: "/Dag 4 Stagedive film.mov",
     poster: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=450&fit=crop",
   },
   {
     id: 3,
-    title: "Borz Athletes Torpal",
+    title: "Borz Athletes",
     video: "https://player.vimeo.com/video/1176185877",
     poster: "https://vumbnail.com/1176185877.jpg",
   },
@@ -33,13 +33,13 @@ const landscapeProjects = [
   {
     id: 5,
     title: "Finsland Live Aftermovie",
-    video: "/Finsland Live Aftermovie kortere versjon.mp4",
+    video: "/https://player.cloudinary.com/embed/?cloud_name=dom8piybw&public_id=Finsland_Live_Aftermovie_kortere_versjon_bonkyu",
     poster: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&h=450&fit=crop",
   },
   {
     id: 6,
-    title: "Fagbrevutdeling film",
-    video: "/Fagbrevutdeling film v2.mp4",
+    title: "Fagbrevutdeling",
+    video: "https://player.cloudinary.com/embed/?cloud_name=dom8piybw&public_id=Fagbrevutdeling_film_v2_wvhsvj",
     poster: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&h=450&fit=crop",
   },
 ]
@@ -54,19 +54,19 @@ const reelProjects = [
   },
   {
     id: 8,
-    title: "Havblikk – Promo 3",
+    title: "Havblikk – Promo 2025",
     video: "/Havblikk 2025 3.mp4",
     poster: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=450&h=800&fit=crop",
   },
   {
     id: 9,
-    title: "Havblikk – Promo 1",
+    title: "Havblikk – Promo 2025",
     video: "/Havblikk 2025 1.mp4",
     poster: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=450&h=800&fit=crop",
   },
   {
     id: 10,
-    title: "B2B – Bil & Hotell",
+    title: "Sød Konfekt – Bil & Hotell",
     video: "/B2B Bil & Hotell.mov",
     poster: "https://images.unsplash.com/photo-1516031190212-da133013de50?w=450&h=800&fit=crop",
   },
@@ -78,13 +78,13 @@ const reelProjects = [
   },
   {
     id: 12,
-    title: "Staysman – Sommerbris",
+    title: "Sommerbris – Staysman",
     video: "/Staysman Sommerbris.mp4",
     poster: "https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=450&h=800&fit=crop",
   },
   {
     id: 13,
-    title: "Sommerbris – Lever livet",
+    title: "Sommerbris – 2025",
     video: "/Sommerbris Lever livet.mp4",
     poster: "https://images.unsplash.com/photo-1519996409144-56c880b0c68a?w=450&h=800&fit=crop",
   },
