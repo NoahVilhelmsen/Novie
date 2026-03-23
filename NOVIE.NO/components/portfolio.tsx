@@ -145,12 +145,12 @@ function VideoCard({ project }: { project: (typeof projects)[number] }) {
     >
       {project.video.includes("vimeo") ? (
   <iframe
-    src={`${project.video}?badge=0&autopause=0&player_id=0&app_id=58479`}
-    frameBorder="0"
-    allow="autoplay; fullscreen; picture-in-picture"
-    className="w-full h-full absolute top-0 left-0"
-    title={project.title}
-  />
+  src={`${project.video}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1`}
+  frameBorder="0"
+  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+  className="w-full h-full absolute top-0 left-0"
+  title={project.title}
+/>
 ) : (
   <video
     ref={videoRef}
