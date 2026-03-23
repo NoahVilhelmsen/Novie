@@ -9,38 +9,38 @@ const landscapeProjects = [
   {
     id: 1,
     title: "Davinci Resolve - Behind The Creator",
-    video: "https://player.vimeo.com/video/1176194270",
+    video: "https://res.cloudinary.com/dom8piybw/video/upload/Final_med_SFX_og_musikk_hvypyy.mp4",
     poster: "https://vumbnail.com/1176194270.jpg",
   },
   {
     id: 2,
     title: "Stagedive 2025",
-    video: "/Dag 4 Stagedive film.mov",
-    poster: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=450&fit=crop",
+    video: "https://res.cloudinary.com/dom8piybw/video/upload/v1774273630/Stagedive_2025_zcqxwe.mp4",
+    poster: "https://res.cloudinary.com/dom8piybw/image/upload/v1774273630/Stagedive_2025_zcqxwe.jpg",
   },
   {
     id: 3,
     title: "Borz Athletes",
-    video: "https://player.vimeo.com/video/1176185877",
+    video: "https://res.cloudinary.com/dom8piybw/video/upload/v1774117748/Borz_atheletes_Torpal_pvpz6q.mov",
     poster: "https://vumbnail.com/1176185877.jpg",
   },
   {
     id: 4,
     title: "Last Wave EPK",
-    video: "/Last Wave EPK.mov",
-    poster: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&h=450&fit=crop",
+    video: "https://res.cloudinary.com/dom8piybw/video/upload/v1774273898/Last_Wave_EPK_jsmxl4.mp4",
+    poster: "https://res.cloudinary.com/dom8piybw/image/upload/v1774273898/Last_Wave_EPK_jsmxl4.jpg",
   },
   {
     id: 5,
     title: "Finsland Live Aftermovie",
     video: "https://res.cloudinary.com/dom8piybw/video/upload/Finsland_Live_Aftermovie_kortere_versjon_bonkyu.mp4",
-    poster: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&h=450&fit=crop",
+    poster: "https://res.cloudinary.com/dom8piybw/image/upload/Finsland_Live_Aftermovie_kortere_versjon_bonkyu.jpg",
   },
   {
     id: 6,
-    title: "Fagbrevutdeling",
+    title: "Fagbrevutdeling Reklamefilm",
     video: "https://res.cloudinary.com/dom8piybw/video/upload/Fagbrevutdeling_film_v2_wvhsvj.mp4",
-    poster: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&h=450&fit=crop",
+    poster: "https://res.cloudinary.com/dom8piybw/image/upload/Fagbrevutdeling_film_v2_wvhsvj.jpg",
   },
 ]
 
