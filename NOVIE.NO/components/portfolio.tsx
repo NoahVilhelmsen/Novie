@@ -33,13 +33,13 @@ const landscapeProjects = [
   {
     id: 5,
     title: "Finsland Live Aftermovie",
-    video: "/https://player.cloudinary.com/embed/?cloud_name=dom8piybw&public_id=Finsland_Live_Aftermovie_kortere_versjon_bonkyu",
+    video: "https://res.cloudinary.com/dom8piybw/video/upload/Finsland_Live_Aftermovie_kortere_versjon_bonkyu.mp4",
     poster: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&h=450&fit=crop",
   },
   {
     id: 6,
     title: "Fagbrevutdeling",
-    video: "https://player.cloudinary.com/embed/?cloud_name=dom8piybw&public_id=Fagbrevutdeling_film_v2_wvhsvj",
+    video: "https://res.cloudinary.com/dom8piybw/video/upload/Fagbrevutdeling_film_v2_wvhsvj.mp4",
     poster: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&h=450&fit=crop",
   },
 ]
