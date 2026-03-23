@@ -20,8 +20,8 @@ const landscapeProjects = [
   {
     id: 3,
     title: "Borz Athletes Torpal",
-    video: "/Borz atheletes Torpal.mov",
-    poster: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=450&fit=crop",
+    video: "https://player.vimeo.com/video/1176185877",
+    poster: "https://vumbnail.com/1176185877.jpg",
   },
   {
     id: 4,
@@ -143,15 +143,25 @@ function VideoCard({ project }: { project: (typeof projects)[number] }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <video
-        ref={videoRef}
-        className="w-full h-full object-cover"
-        loop
-        playsInline
-        poster={project.poster}
-      >
-        <source src={project.video} type="video/mp4" />
-      </video>
+      {project.video.includes("vimeo") ? (
+  <iframe
+    src={`${project.video}?badge=0&autopause=0&player_id=0&app_id=58479`}
+    frameBorder="0"
+    allow="autoplay; fullscreen; picture-in-picture"
+    className="w-full h-full absolute top-0 left-0"
+    title={project.title}
+  />
+) : (
+  <video
+    ref={videoRef}
+    className="w-full h-full object-cover"
+    loop
+    playsInline
+    poster={project.poster}
+  >
+    <source src={project.video} type="video/mp4" />
+  </video>
+)}
 
       {/* Overlay with Title (always visible on mobile, hover on desktop) */}
       <div
