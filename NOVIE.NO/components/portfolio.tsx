@@ -1,5 +1,6 @@
 "use client"
 
+import Player from '@vimeo/player'
 import { useState, useRef } from "react"
 import { Play, Pause } from "lucide-react"
 
@@ -103,12 +104,26 @@ const projects = [
 
 function VideoCard({ project }: { project: (typeof projects)[number] }) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+  const vimeoPlayerRef = useRef<Player | null>(null)
   const [isHovering, setIsHovering] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
+  const isVimeo = project.video.includes("vimeo")
+
+  const initVimeoPlayer = () => {
+    if (isVimeo && iframeRef.current && !vimeoPlayerRef.current) {
+      vimeoPlayerRef.current = new Player(iframeRef.current)
+    }
+  }
 
   const handleMouseEnter = () => {
     setIsHovering(true)
-    if (videoRef.current) {
+    if (isVimeo) {
+      initVimeoPlayer()
+      vimeoPlayerRef.current?.play()
+      setIsPlaying(true)
+    } else if (videoRef.current) {
       videoRef.current.play().catch(() => {})
       setIsPlaying(true)
     }
@@ -116,7 +131,10 @@ function VideoCard({ project }: { project: (typeof projects)[number] }) {
 
   const handleMouseLeave = () => {
     setIsHovering(false)
-    if (videoRef.current) {
+    if (isVimeo) {
+      vimeoPlayerRef.current?.pause()
+      setIsPlaying(false)
+    } else if (videoRef.current) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
       setIsPlaying(false)
@@ -124,7 +142,15 @@ function VideoCard({ project }: { project: (typeof projects)[number] }) {
   }
 
   const togglePlay = () => {
-    if (videoRef.current) {
+    if (isVimeo) {
+      if (isPlaying) {
+        vimeoPlayerRef.current?.pause()
+        setIsPlaying(false)
+      } else {
+        vimeoPlayerRef.current?.play()
+        setIsPlaying(true)
+      }
+    } else if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause()
         setIsPlaying(false)
@@ -132,6 +158,16 @@ function VideoCard({ project }: { project: (typeof projects)[number] }) {
         videoRef.current.play().catch(() => {})
         setIsPlaying(true)
       }
+    }
+  }
+
+  const toggleMute = () => {
+    if (isVimeo) {
+      vimeoPlayerRef.current?.setVolume(isMuted ? 1 : 0)
+      setIsMuted(!isMuted)
+    } else if (videoRef.current) {
+      videoRef.current.muted = !isMuted
+      setIsMuted(!isMuted)
     }
   }
 
@@ -143,27 +179,29 @@ function VideoCard({ project }: { project: (typeof projects)[number] }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {project.video.includes("vimeo") ? (
-  <iframe
-  src={`${project.video}?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1`}
-  frameBorder="0"
-  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-  className="w-full h-full absolute top-0 left-0"
-  title={project.title}
-/>
-) : (
-  <video
-    ref={videoRef}
-    className="w-full h-full object-cover"
-    loop
-    playsInline
-    poster={project.poster}
-  >
-    <source src={project.video} type="video/mp4" />
-  </video>
-)}
+      {isVimeo ? (
+        <iframe
+          ref={iframeRef}
+          src={`${project.video}?badge=0&autopause=0&player_id=0&app_id=58479&muted=1`}
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+          className="w-full h-full absolute top-0 left-0"
+          title={project.title}
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          loop
+          playsInline
+          muted
+          poster={project.poster}
+        >
+          <source src={project.video} type="video/mp4" />
+        </video>
+      )}
 
-      {/* Overlay with Title (always visible on mobile, hover on desktop) */}
+      {/* Overlay */}
       <div
         className={`absolute inset-0 bg-black/0 flex items-end transition-opacity duration-300
           opacity-100 md:opacity-0 ${isHovering ? "md:opacity-100" : ""}`}
@@ -172,20 +210,26 @@ function VideoCard({ project }: { project: (typeof projects)[number] }) {
           <h3 className="text-white text-lg md:text-xl font-medium">
             {project.title}
           </h3>
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              togglePlay()
-            }}
-            className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
-            aria-label={isPlaying ? "Pause" : "Spill av"}
-          >
-            {isPlaying ? (
-              <Pause className="h-4 w-4 text-white" />
-            ) : (
-              <Play className="h-4 w-4 text-white" />
-            )}
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={(e) => { e.stopPropagation(); toggleMute() }}
+              className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+              aria-label={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? "🔇" : "🔊"}
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); togglePlay() }}
+              className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-colors"
+              aria-label={isPlaying ? "Pause" : "Spill av"}
+            >
+              {isPlaying ? (
+                <Pause className="h-4 w-4 text-white" />
+              ) : (
+                <Play className="h-4 w-4 text-white" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </div>
