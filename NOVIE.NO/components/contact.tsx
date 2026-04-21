@@ -6,16 +6,38 @@ import { Send, Mail, MapPin, Instagram } from "lucide-react"
 export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    
-    setIsLoading(false)
-    setIsSubmitted(true)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+    const name = formData.get("name")?.toString().trim() ?? ""
+    const email = formData.get("email")?.toString().trim() ?? ""
+    const message = formData.get("message")?.toString().trim() ?? ""
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Kunne ikke sende melding")
+      }
+
+      setIsSubmitted(true)
+      e.currentTarget.reset()
+    } catch {
+      setError("Noe gikk galt. Prøv igjen om litt.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -121,6 +143,9 @@ export function Contact() {
                 {isLoading ? "Sender..." : "Send melding"}
                 <Send className="h-4 w-4" />
               </button>
+              {error && (
+                <p className="text-sm text-red-500">{error}</p>
+              )}
             </form>
           )}
         </div>

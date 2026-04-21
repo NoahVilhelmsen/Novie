@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@vimeo/player": "^2.30.3"
+    "@vimeo/player": "^2.30.3",
+    "resend": "^6.12.2"
   }
 }
