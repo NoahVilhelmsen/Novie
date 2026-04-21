@@ -47,13 +47,18 @@ export async function POST(request: Request) {
     })
 
     if (!response.ok) {
-      throw new Error("Resend request failed")
+      const errorBody = await response.text()
+      return NextResponse.json(
+        { error: `Resend feil (${response.status}): ${errorBody}` },
+        { status: 500 },
+      )
     }
 
     return NextResponse.json({ ok: true })
-  } catch {
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error"
     return NextResponse.json(
-      { error: "Failed to send message" },
+      { error: `Failed to send message: ${message}` },
       { status: 500 },
     )
   }

@@ -28,13 +28,16 @@ export function Contact() {
       })
 
       if (!response.ok) {
-        throw new Error("Kunne ikke sende melding")
+        const data = (await response.json()) as { error?: string }
+        throw new Error(data.error ?? "Kunne ikke sende melding")
       }
 
       setIsSubmitted(true)
       e.currentTarget.reset()
-    } catch {
-      setError("Noe gikk galt. Prøv igjen om litt.")
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Noe gikk galt. Prøv igjen om litt."
+      setError(message)
     } finally {
       setIsLoading(false)
     }
