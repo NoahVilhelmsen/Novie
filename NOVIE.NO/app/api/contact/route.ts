@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import { Resend } from "resend"
 
 type ContactPayload = {
   name?: string
@@ -31,16 +30,25 @@ export async function POST(request: Request) {
     )
   }
 
-  const resend = new Resend(resendApiKey)
-
   try {
-    await resend.emails.send({
-      from: contactFromEmail,
-      to: contactToEmail,
-      replyTo: email,
-      subject: `Ny henvendelse fra ${name}`,
-      text: `Navn: ${name}\nE-post: ${email}\n\nMelding:\n${message}`,
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: contactFromEmail,
+        to: [contactToEmail],
+        reply_to: email,
+        subject: `Ny henvendelse fra ${name}`,
+        text: `Navn: ${name}\nE-post: ${email}\n\nMelding:\n${message}`,
+      }),
     })
+
+    if (!response.ok) {
+      throw new Error("Resend request failed")
+    }
 
     return NextResponse.json({ ok: true })
   } catch {
