@@ -8,12 +8,19 @@ type ContactPayload = {
 
 export async function POST(request: Request) {
   const resendApiKey = process.env.RESEND_API_KEY
-  const contactToEmail = process.env.CONTACT_TO_EMAIL
-  const contactFromEmail = process.env.CONTACT_FROM_EMAIL
+  const contactToEmail = process.env.CONTACT_TO_EMAIL ?? process.env.RESEND_TO_EMAIL
+  const contactFromEmail =
+    process.env.CONTACT_FROM_EMAIL ?? process.env.RESEND_FROM_EMAIL
 
   if (!resendApiKey || !contactToEmail || !contactFromEmail) {
+    const missingVars = [
+      !resendApiKey ? "RESEND_API_KEY" : null,
+      !contactToEmail ? "CONTACT_TO_EMAIL/RESEND_TO_EMAIL" : null,
+      !contactFromEmail ? "CONTACT_FROM_EMAIL/RESEND_FROM_EMAIL" : null,
+    ].filter(Boolean)
+
     return NextResponse.json(
-      { error: "Missing email configuration" },
+      { error: `Missing email configuration: ${missingVars.join(", ")}` },
       { status: 500 },
     )
   }
